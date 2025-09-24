@@ -73,7 +73,7 @@ if ($hargaProduk > 100000) {
 }
 $hargaAkhir = $hargaProduk - $diskon;
 echo "<br><br>";
-echo "Harga yang harus dibayar setelah diskon: Rp $hargaAkhir";
+echo "Harga yang harus dibayar setelah diskon: Rp " . number_format($hargaAkhir, 0, ',', '.');
 
 //soal no 4.8
 $jumlahPoin = 650;
