@@ -39,7 +39,7 @@
         </div>
 
         <div class="announcement">
-            <h3></i> Announcement</h3>
+            <h3>Announcement</h3>
             <div class="announcement-content">
                 <table>
                     <?php
