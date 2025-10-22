@@ -14,8 +14,22 @@ $(document).ready(function() {
     } else if(password === ""){
         $("#errorMsg").text("Password tidak boleh kosong!");
         return;
-    }else{
-        window.open('homePage.php'); 
     }
+
+     $.ajax({
+        url: "login.php",
+        type: "POST",
+        data: { NIM: nim, password: password },
+        success: function (response) {
+          if (response.trim() === "success") {
+              window.open('homePage.php');
+          } else {
+            $("#errorMsg").text(response);
+          }
+        },
+        error: function () {
+          $("#errorMsg").text("Terjadi kesalahan koneksi ke server.");
+        },
+    });
   });
 });
