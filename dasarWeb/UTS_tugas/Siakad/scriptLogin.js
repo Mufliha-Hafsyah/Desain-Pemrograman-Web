@@ -23,7 +23,7 @@ $(document).ready(function() {
             data: { NIM: nim, password: password },
             success: function (response) {
               if (response.trim() === "success") {
-                  window.location.href = 'homePage.php'; 
+                window.open('homePage.php', '_blank');
               } else {
                 $("#errorMsg").text(response);
               }

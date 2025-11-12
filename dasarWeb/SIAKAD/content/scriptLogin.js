@@ -18,12 +18,12 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: "login.php",
+            url: "CRUD/login.php",
             type: "POST",
             data: { NIM: nim, password: password },
             success: function (response) {
               if (response.trim() === "success") {
-                  window.location.href = 'homePage.php'; 
+                window.open('homePage.php', '_blank');
               } else {
                 $("#errorMsg").text(response);
               }

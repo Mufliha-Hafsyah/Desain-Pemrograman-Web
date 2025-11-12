@@ -1,6 +1,6 @@
 <?php
 session_start();
-require __DIR__ . '/connection.php';
+require __DIR__ . '/CRUD/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nim = isset($_POST["NIM"]) ? trim($_POST["NIM"]) : '';
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Gunakan parameterized query untuk mencegah SQL injection
     $sql = "SELECT username, nim, password FROM users WHERE nim = $1";
-    $result = pg_query_params($dbConnect, $sql, array($nim));
+    $result = pg_query_params(get_pg_connection(), $sql, array($nim));
 
     if ($result && pg_num_rows($result) > 0) {
         $user = pg_fetch_assoc($result);
@@ -24,14 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['username'] = $user['username'];
             
             echo "success";
-            pg_close($dbConnect);
+            pg_close(get_pg_connection());
             exit;
         }
     }
     
     // Jika sampai di sini, berarti login gagal
     echo "NIM atau Password Salah!";
-    pg_close($dbConnect);
+    pg_close(get_pg_connection());
     exit;
 }
 ?>

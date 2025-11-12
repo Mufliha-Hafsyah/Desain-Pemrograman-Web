@@ -1,4 +1,19 @@
- <!DOCTYPE html>
+<?php
+    // session_start() HARUS di paling atas
+    session_start();
+    
+    // Cek Sesi: Jika sesi 'nim' tidak ada, alihkan ke login
+    if (!isset($_SESSION['nim'])) {
+        header('Location: login-page.html');
+        exit;
+    }
+
+    // Ambil data dari sesi
+    $user_nim = $_SESSION['nim'];
+
+    $user_username = htmlspecialchars($_SESSION['username']); 
+?>
+<!DOCTYPE html>
 <html>
 <head>
     <title>SIAKAD POLINEMA</title>
@@ -10,9 +25,11 @@
 <body>
     <div class="sidebar">
         <div class="profile">
-            <img src="../img/fotoUser.jpg">
-            <h3>Mufliha Hafsyah Shahieza</h3>
-            <p>244107020147</p>
+            <a href="update_data.php">
+                <img src="../img/fotoUser.jpg">
+            </a>
+            <h3><?php echo $user_username; ?></h3>
+            <p><?php echo $user_nim; ?></p>
         </div>
 
         <nav class="menu">
@@ -24,7 +41,7 @@
             <a href="#">Pembayaran UKT</a>
             <a href="#">Presensi Mahasiswa</a>
             <a href="#">Kartu Tanda Mahasiswa</a>
-            <a href="login-page.html" id="logout">Log Out</a>
+            <a href="logout.php" id="logout">Log Out</a>
         </nav>
     </div>
 
